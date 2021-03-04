@@ -6,22 +6,24 @@ import java.math.BigDecimal;
 
 public class Calculator {
     private final AppCompatActivity parent;
-    private BigDecimal lValue , rValue; //number1 is the current solution stored in the calculator, number2 is the value used in whatever calculation is done to number1
-    private StringBuilder inputbuffer; //Buffer for input values
-    private String output, operationbuffer; //Buffer for operations
+    private BigDecimal leftOperand , rightOperand; //number1 is the current solution stored in the calculator, number2 is the value used in whatever calculation is done to number1
+    private StringBuilder inputBuffer ; //Buffer for input values
+    private String outputBuffer, operationBuffer ; //Buffer for operations
+    private boolean inputAccumulate; //True - input is appended to the current input value; False - input replaces the current input value
 
     public Calculator(AppCompatActivity parent) {
         this.parent = parent;
         // Initialize default operand values
-        this.lValue  = BigDecimal.ZERO;
-        this.rValue = BigDecimal.ZERO;
+        this.leftOperand = null;
+        this.rightOperand = null;
 
         // Initialize the input buffer
-        this.inputbuffer = new StringBuilder("0");
-        this.operationbuffer = "";
-        this.output = "0";
+        this.inputBuffer = new StringBuilder("0"); //Default input value is 0
+        this.operationBuffer = "";
+        this.outputBuffer = "0";
 
-
+        //Set accumulate switch to false
+        this.inputAccumulate = false;
     }
 
     public void process(String button) {
@@ -29,229 +31,360 @@ public class Calculator {
         //Input
 
         if ( button.equals( parent.getResources().getString(R.string.btn0) ) ) {
-            // if the buffer isn't 0, add a 0 to the buffer
-            if (!"0".equals(inputbuffer.toString())) {
-                inputbuffer.append("0");
-                rValue = new BigDecimal(inputbuffer.toString());
-                output = inputbuffer.toString();
-            } else {
-                rValue = BigDecimal.ZERO;
-                output = "0";
+            // if the input buffer isn't currently 0
+            if (!"0".equals(inputBuffer.toString())) {
+                //If accumulate is true, append a 0
+                if (inputAccumulate = true) {
+                    inputBuffer.append("0");
+                } else { //If accumulate is false, replace the current input buffer with 0
+                    inputBuffer.replace(0, inputBuffer.length(), "0");
+
+                }
             }
+            //Update the output buffer
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btn1) ) ) {
-            if ("0".equals(inputbuffer.toString())) {
-                inputbuffer.replace(0, inputbuffer.length(), "");
+            //If the buffer is 0 or accumulate = false
+            //Replace the current input buffer and make accumuluate = true
+            if (("0".equals(inputBuffer.toString()) || inputAccumulate == false)){
+                inputBuffer.replace(0, inputBuffer.length(), "1");
+                inputAccumulate = true;
+            } else {
+                //If the buffer isn't 0 and accumulate = true
+                //Append the digit to the input buffer
+                inputBuffer.append("1");
             }
-            inputbuffer.append("1");
-            rValue = new BigDecimal(inputbuffer.toString());
-            output = inputbuffer.toString();
+            //Update the output buffer
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btn2) ) ) {
-            if ("0".equals(inputbuffer.toString())) {
-                inputbuffer.replace(0, inputbuffer.length(), "");
+            //If the buffer is 0 or accumulate = false
+            //Replace the current input buffer and make accumuluate = true
+            if (("0".equals(inputBuffer.toString()) || inputAccumulate == false)){
+                inputBuffer.replace(0, inputBuffer.length(), "2");
+                inputAccumulate = true;
+            } else {
+                //If the buffer isn't 0 and accumulate = true
+                //Append the digit to the input buffer
+                inputBuffer.append("2");
             }
-            inputbuffer.append("2");
-            rValue = new BigDecimal(inputbuffer.toString());
-            output = inputbuffer.toString();
+            //Update the output buffer
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btn3) ) ) {
-            if ("0".equals(inputbuffer.toString())) {
-                inputbuffer.replace(0, inputbuffer.length(), "");
+            //If the buffer is 0 or accumulate = false
+            //Replace the current input buffer and make accumuluate = true
+            if (("0".equals(inputBuffer.toString()) || inputAccumulate == false)){
+                inputBuffer.replace(0, inputBuffer.length(), "3");
+                inputAccumulate = true;
+            } else {
+                //If the buffer isn't 0 and accumulate = true
+                //Append the digit to the input buffer
+                inputBuffer.append("3");
             }
-            inputbuffer.append("3");
-            rValue = new BigDecimal(inputbuffer.toString());
-            output = inputbuffer.toString();
+            //Update the output buffer
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btn4) ) ) {
-            if ("0".equals(inputbuffer.toString())) {
-                inputbuffer.replace(0, inputbuffer.length(), "");
+            //If the buffer is 0 or accumulate = false
+            //Replace the current input buffer and make accumuluate = true
+            if (("0".equals(inputBuffer.toString()) || inputAccumulate == false)){
+                inputBuffer.replace(0, inputBuffer.length(), "4");
+                inputAccumulate = true;
+            } else {
+                //If the buffer isn't 0 and accumulate = true
+                //Append the digit to the input buffer
+                inputBuffer.append("4");
             }
-            inputbuffer.append("4");
-            rValue = new BigDecimal(inputbuffer.toString());
-            output = inputbuffer.toString();
+            //Update the output buffer
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btn5) ) ) {
-            if ("0".equals(inputbuffer.toString())) {
-                inputbuffer.replace(0, inputbuffer.length(), "");
+            //If the buffer is 0 or accumulate = false
+            //Replace the current input buffer and make accumuluate = true
+            if (("0".equals(inputBuffer.toString()) || inputAccumulate == false)){
+                inputBuffer.replace(0, inputBuffer.length(), "5");
+                inputAccumulate = true;
+            } else {
+                //If the buffer isn't 0 and accumulate = true
+                //Append the digit to the input buffer
+                inputBuffer.append("5");
             }
-            inputbuffer.append("5");
-            rValue = new BigDecimal(inputbuffer.toString());
-            output = inputbuffer.toString();
+            //Update the output buffer
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btn6) ) ) {
-            if ("0".equals(inputbuffer.toString())) {
-                inputbuffer.replace(0, inputbuffer.length(), "");
+            //If the buffer is 0 or accumulate = false
+            //Replace the current input buffer and make accumuluate = true
+            if (("0".equals(inputBuffer.toString()) || inputAccumulate == false)){
+                inputBuffer.replace(0, inputBuffer.length(), "6");
+                inputAccumulate = true;
+            } else {
+                //If the buffer isn't 0 and accumulate = true
+                //Append the digit to the input buffer
+                inputBuffer.append("6");
             }
-            inputbuffer.append("6");
-            rValue = new BigDecimal(inputbuffer.toString());
-            output = inputbuffer.toString();
+            //Update the output buffer
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btn7) ) ) {
-            if ("0".equals(inputbuffer.toString())) {
-                inputbuffer.replace(0, inputbuffer.length(), "");
+            //If the buffer is 0 or accumulate = false
+            //Replace the current input buffer and make accumuluate = true
+            if (("0".equals(inputBuffer.toString()) || inputAccumulate == false)){
+                inputBuffer.replace(0, inputBuffer.length(), "7");
+                inputAccumulate = true;
+            } else {
+                //If the buffer isn't 0 and accumulate = true
+                //Append the digit to the input buffer
+                inputBuffer.append("7");
             }
-            inputbuffer.append("7");
-            rValue = new BigDecimal(inputbuffer.toString());
-            output = inputbuffer.toString();
+            //Update the output buffer
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btn8) ) ) {
-            if ("0".equals(inputbuffer.toString())) {
-                inputbuffer.replace(0, inputbuffer.length(), "");
+            //If the buffer is 0 or accumulate = false
+            //Replace the current input buffer and make accumuluate = true
+            if (("0".equals(inputBuffer.toString()) || inputAccumulate == false)){
+                inputBuffer.replace(0, inputBuffer.length(), "8");
+                inputAccumulate = true;
+            } else {
+                //If the buffer isn't 0 and accumulate = true
+                //Append the digit to the input buffer
+                inputBuffer.append("8");
             }
-            inputbuffer.append("8");
-            rValue = new BigDecimal(inputbuffer.toString());
-            output = inputbuffer.toString();
+            //Update the output buffer
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btn9) ) ) {
-            if ("0".equals(inputbuffer.toString())) {
-                inputbuffer.replace(0, inputbuffer.length(), "");
+            //If the buffer is 0 or accumulate = false
+            //Replace the current input buffer and make accumuluate = true
+            if (("0".equals(inputBuffer.toString()) || inputAccumulate == false)){
+                inputBuffer.replace(0, inputBuffer.length(), "9");
+                inputAccumulate = true;
+            } else {
+                //If the buffer isn't 0 and accumulate = true
+                //Append the digit to the input buffer
+                inputBuffer.append("9");
             }
-            inputbuffer.append("9");
-            rValue = new BigDecimal(inputbuffer.toString());
-            output = inputbuffer.toString();
+            //Update the output buffer
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnDec) ) ) {
-            if (!inputbuffer.toString().contains(".")) { //If the inputbuffer doesn't already have a decimal
-                inputbuffer.append(".");
-                rValue = new BigDecimal(inputbuffer.toString());
-                output = inputbuffer.toString();
+            //If the input buffer doesn't already contain a decimal, append one
+            if (!inputBuffer.toString().contains(".")) {
+                inputBuffer.append(".");
+                //Update the output buffer
+                outputBuffer = inputBuffer.toString();
             }
         }
 
         //Operations
 
         if ( button.equals( parent.getResources().getString(R.string.btnPlus) ) ) {
-            //Do the previous operation in the operation buffer
-            operate();
+            //Convert the input buffer and store it as an operand
+            if (leftOperand == null){
+                leftOperand = new BigDecimal(inputBuffer.toString());
+            } else {
+                rightOperand = new BigDecimal(inputBuffer.toString());
+            }
+
+            //If the operation buffer isn't empty, calculate its operation
+            if (operationBuffer != null) {
+                operate();
+            }
+
+            //Update the output buffer to show the answer of the previous operation (stored in leftOperand)
+            outputBuffer = leftOperand.toString();
 
             //Put an addition operation in the operation buffer
-            operationbuffer = "add";
+            operationBuffer = "add";
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnMinus) ) ) {
-            //Do the previous operation in the operation buffer
-            operate();
+            //Convert the input buffer and store it as an operand
+            if (leftOperand == null){
+                leftOperand = new BigDecimal(inputBuffer.toString());
+            } else {
+                rightOperand = new BigDecimal(inputBuffer.toString());
+            }
 
-            //Put a subtraction operation in the operation buffer
-            operationbuffer = "subtract";
+            //If the operation buffer isn't empty, calculate its operation
+            if (operationBuffer != null) {
+                operate();
+            }
+
+            //Update the output buffer to show the answer of the previous operation (stored in leftOperand)
+            outputBuffer = leftOperand.toString();
+
+            //Put an addition operation in the operation buffer
+            operationBuffer = "subtract";
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnDiv) ) ) {
-            //Do the previous operation in the operation buffer
-            operate();
+            //Convert the input buffer and store it as an operand
+            if (leftOperand == null){
+                leftOperand = new BigDecimal(inputBuffer.toString());
+            } else {
+                rightOperand = new BigDecimal(inputBuffer.toString());
+            }
 
-            //Put a subtraction operation in the operation buffer
-            operationbuffer = "divide";
+            //If the operation buffer isn't empty, calculate its operation
+            if (operationBuffer != null) {
+                operate();
+            }
+
+            //Update the output buffer to show the answer of the previous operation (stored in leftOperand)
+            outputBuffer = leftOperand.toString();
+
+            //Put an addition operation in the operation buffer
+            operationBuffer = "divide";
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnMul) ) ) {
-            //Do the previous operation in the operation buffer
-            operate();
+            //Convert the input buffer and store it as an operand
+            if (leftOperand == null){
+                leftOperand = new BigDecimal(inputBuffer.toString());
+            } else {
+                rightOperand = new BigDecimal(inputBuffer.toString());
+            }
 
-            //Put a subtraction operation in the operation buffer
-            operationbuffer = "multiply";
+            //If the operation buffer isn't empty, calculate its operation
+            if (operationBuffer != null) {
+                operate();
+            }
+
+            //Update the output buffer to show the answer of the previous operation (stored in leftOperand)
+            outputBuffer = leftOperand.toString();
+
+            //Put an addition operation in the operation buffer
+            operationBuffer = "multiply";
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnPer) ) ) {
-            //Do the previous operation in the operation buffer
-            operate();
+            //Convert the input buffer and store it as an operand
+            if (leftOperand == null){
+                leftOperand = new BigDecimal(inputBuffer.toString());
+            } else {
+                rightOperand = new BigDecimal(inputBuffer.toString());
+            }
 
-            //Put a subtraction operation in the operation buffer
-            operationbuffer = "modulo";
+            //If the operation buffer isn't empty, calculate its operation
+            if (operationBuffer != null) {
+                operate();
+            }
+
+            //Update the output buffer to show the answer of the previous operation (stored in leftOperand)
+            outputBuffer = leftOperand.toString();
+
+            //Put an addition operation in the operation buffer
+            operationBuffer = "modulo";
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnEq) ) ) {
-            //Do the previous operation in the operation buffer
-            operate();
+            //Convert the input buffer and store it as an operand
+            if (leftOperand == null){
+                leftOperand = new BigDecimal(inputBuffer.toString());
+            } else {
+                rightOperand = new BigDecimal(inputBuffer.toString());
+            }
 
-            operationbuffer = "";
+            //If the operation buffer isn't empty, calculate its operation
+            if (operationBuffer != null) {
+                operate();
+            }
+
+            //Update the output buffer to show the answer of the previous operation (stored in leftOperand)
+            outputBuffer = leftOperand.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnSqRt) ) ) {
-            rValue = BigDecimal.valueOf((Math.pow(rValue .doubleValue(),0.5)));
-            output = rValue.toString();
-            inputbuffer.replace(0, inputbuffer.length(), "0");
+            //Take the current input buffer value and replace it with its square root
+            BigDecimal temp = new BigDecimal(inputBuffer.toString());
+            temp = BigDecimal.valueOf((Math.pow((temp.doubleValue()),0.5)));
+            inputBuffer.replace(0, inputBuffer.length(), temp.toString());
+            outputBuffer = inputBuffer.toString();
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnSign) ) ) {
-            rValue = rValue.multiply(BigDecimal.valueOf(-1));
-            output = rValue.toString();
-            inputbuffer.replace(0, inputbuffer.length(), rValue.toString());;
+            //Take the current input buffer value and replace it with its value * -1
+            BigDecimal temp = new BigDecimal(inputBuffer.toString());
+            temp = temp.multiply(BigDecimal.valueOf(-1));
+            inputBuffer.replace(0, inputBuffer.length(), temp.toString());
+            outputBuffer = inputBuffer.toString();
     }
 
         if ( button.equals( parent.getResources().getString(R.string.btnClear) ) ) {
-            // the "Clear" button was pressed; assign zero to operands and reset buffers
-            inputbuffer.replace(0, inputbuffer.length(), "0");
-            lValue = BigDecimal.ZERO;
-            rValue = BigDecimal.ZERO;
-            output = inputbuffer.toString();
-            operationbuffer = "";
+            // the "Clear" button was pressed; assign default values and reset buffers
+
+            // Default operand values
+            leftOperand = null;
+            rightOperand = null;
+
+            // Reset the buffers
+            inputBuffer.replace(0, inputBuffer.length(), "0");; //Default input value is 0
+            operationBuffer = null;
+            outputBuffer = "0";
+
+            //Set accumulate switch to false
+            inputAccumulate = false;
         }
 
 
     }
 
     public void operate(){
-        switch(operationbuffer){
-            case "add" :
-                lValue = lValue.add(rValue);
-                output = lValue.toString();
-                rValue = lValue;
-                inputbuffer.replace(0, inputbuffer.length(), "0");
-                break;
-            case "subtract" :
-                lValue = lValue.subtract(rValue);
-                output = lValue.toString();
-                rValue = lValue;
-                inputbuffer.replace(0, inputbuffer.length(), "0");
-                break;
-            case "divide" :
-                if (rValue.compareTo(BigDecimal.ZERO) == 0){ //Divide by zero code
-                    output = "Divide by zero error";
-                    inputbuffer.replace(0, inputbuffer.length(), "0");
-                    lValue = BigDecimal.ZERO;
-                    rValue = BigDecimal.ZERO;
-                    operationbuffer = "";
-                } else {
-                    lValue = lValue.divide(rValue);
-                    output = lValue.toString();
-                    rValue = lValue;
-                    inputbuffer.replace(0, inputbuffer.length(), "0");
+
+        //If the leftOperand is null, abort
+        if (leftOperand != null) {
+
+            //If the rightOperand is null, use the leftOperand value
+            if (rightOperand == null) {
+                rightOperand = leftOperand;
+            }
+
+            //Perform the operation stored in the buffer
+            switch (operationBuffer) {
+                case "add":
+                    leftOperand = leftOperand.add(rightOperand); //Add the operands together
                     break;
-                }
-            case "multiply" :
-                lValue = lValue.multiply(rValue);
-                output = lValue.toString();
-                rValue = lValue;
-                inputbuffer.replace(0, inputbuffer.length(), "0");
-                break;
-            case "modulo" :
-                lValue = lValue.remainder(rValue);
-                output = lValue.toString();
-                rValue = lValue;
-                inputbuffer.replace(0, inputbuffer.length(), "0");
-                break;
-            default :
-                lValue = rValue;
-                output = lValue.toString();
-                inputbuffer.replace(0, inputbuffer.length(), "0");
-                break;
+                case "subtract":
+                    leftOperand = leftOperand.subtract(rightOperand); //Subtract the leftOperand by the rightOperand
+                    break;
+                case "divide":
+                    if (rightOperand.compareTo(BigDecimal.ZERO) == 0) { //If the rightOperand is 0, do divide by zero error
+                        //TO-DO
+                    } else {
+                        leftOperand = leftOperand.divide(rightOperand); //Divide the left operand by the right operand
+                        break;
+                    }
+                case "multiply":
+                    leftOperand = leftOperand.multiply(rightOperand); //Multiply the operands
+                    break;
+                case "modulo":
+                    leftOperand = leftOperand.remainder(rightOperand); //Get the remainder of the operands
+                    break;
+                default:
+                    break;
+            }
+            outputBuffer = leftOperand.toString(); //Update the output buffer
+            inputBuffer.replace(0, inputBuffer.length(), leftOperand.toString()); //Update the input buffer
+            inputAccumulate = false; //Set accumulate to false
         }
     }
 
     public String getDisplay(){
-        return output;
+        return outputBuffer;
     }
 
 
