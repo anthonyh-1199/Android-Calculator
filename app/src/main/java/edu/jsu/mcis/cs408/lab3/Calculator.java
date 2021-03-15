@@ -35,7 +35,7 @@ public class Calculator {
             // if the input buffer isn't currently 0
             if (!"0".equals(inputBuffer.toString())) {
                 //If accumulate is true, append a 0
-                if (inputAccumulate = true) {
+                if (inputAccumulate == true) {
                     inputBuffer.append("0");
                 } else { //If accumulate is false, replace the current input buffer with 0
                     inputBuffer.replace(0, inputBuffer.length(), "0");
@@ -384,7 +384,12 @@ public class Calculator {
                     if (rightOperand.compareTo(BigDecimal.ZERO) == 0) { //If the rightOperand is 0, do divide by zero error
                         //TO-DO
                     } else {
-                        leftOperand = leftOperand.divide(rightOperand, 12, RoundingMode.HALF_UP); //Divide the left operand by the right operand
+                        try {
+                            leftOperand = leftOperand.divide(rightOperand); //Divide the left operand by the right operand
+                        } catch (Exception e){
+                            //Cap the precision if the number overflows (1 / 3 = 1.3333333...)
+                            leftOperand = leftOperand.divide(rightOperand, 12, RoundingMode.HALF_UP);
+                        }
                         break;
                     }
                 case "multiply":
