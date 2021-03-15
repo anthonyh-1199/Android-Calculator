@@ -209,6 +209,9 @@ public class Calculator {
 
             //Put an addition operation in the operation buffer
             operationBuffer = "add";
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnMinus) ) ) {
@@ -229,6 +232,9 @@ public class Calculator {
 
             //Put an addition operation in the operation buffer
             operationBuffer = "subtract";
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnDiv) ) ) {
@@ -249,6 +255,9 @@ public class Calculator {
 
             //Put an addition operation in the operation buffer
             operationBuffer = "divide";
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnMul) ) ) {
@@ -269,6 +278,9 @@ public class Calculator {
 
             //Put an addition operation in the operation buffer
             operationBuffer = "multiply";
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnPer) ) ) {
@@ -289,6 +301,9 @@ public class Calculator {
 
             //Put an addition operation in the operation buffer
             operationBuffer = "modulo";
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnEq) ) ) {
@@ -314,6 +329,9 @@ public class Calculator {
             temp = BigDecimal.valueOf((Math.pow((temp.doubleValue()),0.5)));
             inputBuffer.replace(0, inputBuffer.length(), temp.toString());
             outputBuffer = inputBuffer.toString();
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnSign) ) ) {
@@ -322,7 +340,7 @@ public class Calculator {
             temp = temp.multiply(BigDecimal.valueOf(-1));
             inputBuffer.replace(0, inputBuffer.length(), temp.toString());
             outputBuffer = inputBuffer.toString();
-    }
+        }
 
         if ( button.equals( parent.getResources().getString(R.string.btnClear) ) ) {
             // the "Clear" button was pressed; assign default values and reset buffers
