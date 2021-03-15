@@ -3,6 +3,7 @@ package edu.jsu.mcis.cs408.lab3;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Calculator {
     private final AppCompatActivity parent;
@@ -383,7 +384,7 @@ public class Calculator {
                     if (rightOperand.compareTo(BigDecimal.ZERO) == 0) { //If the rightOperand is 0, do divide by zero error
                         //TO-DO
                     } else {
-                        leftOperand = leftOperand.divide(rightOperand); //Divide the left operand by the right operand
+                        leftOperand = leftOperand.divide(rightOperand, 12, RoundingMode.HALF_UP); //Divide the left operand by the right operand
                         break;
                     }
                 case "multiply":
